@@ -1,0 +1,72 @@
+{
+  "NAVBAR": {
+    "HOME": "Início",
+    "CART": "Carrinho",
+    "ORDERS": "Pedidos",
+    "ADMIN": "Administração",
+    "LOGIN": "Entrar",
+    "LOGOUT": "Sair",
+    "REGISTER": "Registar"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Entrar na conta",
+    "REGISTER_TITLE": "Criar conta",
+    "RESET_TITLE": "Recuperar senha",
+    "EMAIL": "Email",
+    "PASSWORD": "Senha",
+    "NAME": "Nome completo",
+    "BTN_LOGIN": "Entrar",
+    "BTN_REGISTER": "Registar",
+    "BTN_RESET": "Recuperar",
+    "NO_ACCOUNT": "Não tens conta?",
+    "HAVE_ACCOUNT": "Já tens conta?",
+    "FORGOT_PASSWORD": "Esqueceste a senha?"
+  },
+  "SHOP": {
+    "TITLE": "Produtos",
+    "SEARCH": "Pesquisar produtos...",
+    "ADD_CART": "Adicionar ao carrinho",
+    "PRICE": "Preço",
+    "CATEGORY": "Categoria",
+    "ALL": "Todos",
+    "NO_PRODUCTS": "Nenhum produto encontrado"
+  },
+  "CART": {
+    "TITLE": "Carrinho",
+    "EMPTY": "O carrinho está vazio",
+    "TOTAL": "Total",
+    "CHECKOUT": "Finalizar compra",
+    "REMOVE": "Remover",
+    "QUANTITY": "Quantidade"
+  },
+  "ORDERS": {
+    "TITLE": "Os meus pedidos",
+    "STATUS": "Estado",
+    "DATE": "Data",
+    "TOTAL": "Total",
+    "DETAILS": "Ver detalhes",
+    "EXPORT": "Exportar PDF"
+  },
+  "ADMIN": {
+    "DASHBOARD": "Dashboard",
+    "PRODUCTS": "Gerir Produtos",
+    "ORDERS": "Gerir Pedidos",
+    "ADD_PRODUCT": "Adicionar Produto",
+    "EDIT": "Editar",
+    "DELETE": "Apagar",
+    "EXPORT_CSV": "Exportar CSV",
+    "NAME": "Nome",
+    "PRICE": "Preço",
+    "STOCK": "Stock",
+    "CATEGORY": "Categoria",
+    "DESCRIPTION": "Descrição"
+  },
+  "THEME": {
+    "DARK": "Modo Escuro",
+    "LIGHT": "Modo Claro"
+  },
+  "LANG": {
+    "PT": "Português",
+    "EN": "Inglês"
+  }
+}
