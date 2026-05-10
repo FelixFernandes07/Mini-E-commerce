@@ -1,0 +1,63 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 1.6rem;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+    }
+
+    .forgot-link {
+      display: block;
+      text-align: right;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      color: #1a1a2e;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: 0.9rem;
+
+      a {
+        color: #1a1a2e;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

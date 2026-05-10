@@ -1,0 +1,46 @@
+<div class="auth-container">
+  <div class="card auth-card">
+    <h2>{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
+
+    <div class="alert alert-error" *ngIf="error">
+      {{ error }}
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>{{ 'AUTH.EMAIL' | translate }}</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          placeholder="exemplo@email.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'AUTH.PASSWORD' | translate }}</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="••••••••"
+        />
+      </div>
+
+      <a routerLink="/auth/reset-password" class="forgot-link">
+        {{ 'AUTH.FORGOT_PASSWORD' | translate }}
+      </a>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? '...' : ('AUTH.BTN_LOGIN' | translate) }}
+      </button>
+    </form>
+
+    <p class="auth-switch">
+      {{ 'AUTH.NO_ACCOUNT' | translate }}
+      <a routerLink="/auth/register">{{ 'AUTH.REGISTER' | translate }}</a>
+    </p>
+  </div>
+</div>
