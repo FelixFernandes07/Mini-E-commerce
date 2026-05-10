@@ -1,0 +1,79 @@
+<div class="user-manage-container">
+  <div class="page-header">
+    <h2>Gerir Utilizadores</h2>
+    <button class="btn-primary" (click)="showForm = !showForm">
+      + Novo Utilizador
+    </button>
+  </div>
+
+  <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <!-- Form -->
+  <div class="form-card card" *ngIf="showForm">
+    <h3>Criar Novo Utilizador</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" [(ngModel)]="form.name" placeholder="Nome completo"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="form.email" placeholder="email@exemplo.com"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" [(ngModel)]="form.password" placeholder="••••••••"/>
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <select [(ngModel)]="form.role">
+          <option value="client">Cliente</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-primary" (click)="createUser()">Criar</button>
+      <button (click)="showForm = false">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-container card" *ngIf="!loading">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>Acções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-badge" [class]="user.role">{{ user.role }}</span>
+          </td>
+          <td>{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <div class="actions">
+              <select (change)="updateRole(user.id, $any($event.target).value)" [value]="user.role">
+                <option value="client">Cliente</option>
+                <option value="admin">Admin</option>
+              </select>
+              <button class="btn-danger" (click)="deleteUser(user.id)">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
