@@ -1,0 +1,72 @@
+{
+  "NAVBAR": {
+    "HOME": "Home",
+    "CART": "Cart",
+    "ORDERS": "Orders",
+    "ADMIN": "Administration",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "REGISTER": "Register"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Sign in",
+    "REGISTER_TITLE": "Create account",
+    "RESET_TITLE": "Reset password",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "NAME": "Full name",
+    "BTN_LOGIN": "Login",
+    "BTN_REGISTER": "Register",
+    "BTN_RESET": "Reset",
+    "NO_ACCOUNT": "Don't have an account?",
+    "HAVE_ACCOUNT": "Already have an account?",
+    "FORGOT_PASSWORD": "Forgot your password?"
+  },
+  "SHOP": {
+    "TITLE": "Products",
+    "SEARCH": "Search products...",
+    "ADD_CART": "Add to cart",
+    "PRICE": "Price",
+    "CATEGORY": "Category",
+    "ALL": "All",
+    "NO_PRODUCTS": "No products found"
+  },
+  "CART": {
+    "TITLE": "Cart",
+    "EMPTY": "Your cart is empty",
+    "TOTAL": "Total",
+    "CHECKOUT": "Checkout",
+    "REMOVE": "Remove",
+    "QUANTITY": "Quantity"
+  },
+  "ORDERS": {
+    "TITLE": "My orders",
+    "STATUS": "Status",
+    "DATE": "Date",
+    "TOTAL": "Total",
+    "DETAILS": "View details",
+    "EXPORT": "Export PDF"
+  },
+  "ADMIN": {
+    "DASHBOARD": "Dashboard",
+    "PRODUCTS": "Manage Products",
+    "ORDERS": "Manage Orders",
+    "ADD_PRODUCT": "Add Product",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "EXPORT_CSV": "Export CSV",
+    "NAME": "Name",
+    "PRICE": "Price",
+    "STOCK": "Stock",
+    "CATEGORY": "Category",
+    "DESCRIPTION": "Description"
+  },
+  "THEME": {
+    "DARK": "Dark Mode",
+    "LIGHT": "Light Mode"
+  },
+  "LANG": {
+    "PT": "Portuguese",
+    "EN": "English"
+  }
+}

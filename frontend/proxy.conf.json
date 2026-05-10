@@ -1,0 +1,7 @@
+{
+  "/backend": {
+    "target": "http://localhost/Projecto%20Mini%20E-commerce",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

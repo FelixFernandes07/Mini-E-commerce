@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/config/cors.php';
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = strtolower(trim($path, '/'));
+$path = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+$path = strtolower($path);
 
 if (str_contains($path, 'auth')) {
     require_once __DIR__ . '/routes/auth.php';

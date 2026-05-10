@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost/Projecto Mini E-commerce/backend';
+ private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.php';
 
   constructor(private http: HttpClient) {}
 

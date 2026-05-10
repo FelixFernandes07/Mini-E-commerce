@@ -6,8 +6,7 @@
       type="text"
       [(ngModel)]="search"
       (ngModelChange)="filterProducts()"
-      placeholder="{{ 'SHOP.SEARCH' | translate }}"
-    />
+      placeholder="{{ 'SHOP.SEARCH' | translate }}"/>
     <select [(ngModel)]="selectedCategory" (ngModelChange)="filterProducts()">
       <option value="">{{ 'SHOP.ALL' | translate }}</option>
       <option *ngFor="let cat of categories" [value]="cat.id">

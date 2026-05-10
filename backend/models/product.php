@@ -38,6 +38,11 @@ class Product {
         return $stmt->execute([$name, $description, $price, $stock, $category_id, $id]);
     }
 
+    public function updateWithImage(int $id, string $name, string $description, float $price, int $stock, int $category_id, string $image): bool {
+        $stmt = $this->conn->prepare("UPDATE {$this->table} SET name=?, description=?, price=?, stock=?, category_id=?, image=? WHERE id=?");
+        return $stmt->execute([$name, $description, $price, $stock, $category_id, $image, $id]);
+    }
+
     public function delete(int $id): bool {
         $stmt = $this->conn->prepare("DELETE FROM {$this->table} WHERE id = ?");
         return $stmt->execute([$id]);

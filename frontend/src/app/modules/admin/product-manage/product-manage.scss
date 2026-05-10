@@ -46,10 +46,7 @@
       justify-content: space-between;
       margin-bottom: 24px;
 
-      h3 {
-        font-size: 1.3rem;
-        font-weight: 700;
-      }
+      h3 { font-size: 1.3rem; font-weight: 700; }
 
       .close {
         background: #f0f0f0;
@@ -57,12 +54,8 @@
         border-radius: 8px;
         padding: 8px 12px;
         cursor: pointer;
-        font-size: 1rem;
 
-        &:hover {
-          background: #e74c3c;
-          color: white;
-        }
+        &:hover { background: #e74c3c; color: white; }
       }
     }
 
@@ -76,10 +69,7 @@
         font-size: 0.9rem;
       }
 
-      textarea {
-        resize: vertical;
-        min-height: 80px;
-      }
+      textarea { resize: vertical; min-height: 80px; }
     }
 
     .form-row {
@@ -88,17 +78,37 @@
       gap: 16px;
     }
 
+    .image-upload {
+      width: 100%;
+      height: 160px;
+      border: 2px dashed #ddd;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+
+      &:hover { border-color: #1a1a2e; }
+
+      img { width: 100%; height: 100%; object-fit: cover; }
+
+      .upload-placeholder {
+        text-align: center;
+        color: #888;
+
+        span { font-size: 2rem; }
+        p { font-size: 0.9rem; margin-top: 8px; }
+      }
+    }
+
     .modal-actions {
       display: flex;
       gap: 12px;
       margin-top: 24px;
 
-      button {
-        flex: 1;
-        padding: 12px;
-        font-weight: 600;
-        border-radius: 12px;
-      }
+      button { flex: 1; padding: 12px; font-weight: 600; border-radius: 12px; }
     }
   }
 
@@ -148,10 +158,7 @@
         font-size: 0.85rem;
         font-weight: 600;
 
-        &.low {
-          background: #f8d7da;
-          color: #721c24;
-        }
+        &.low { background: #f8d7da; color: #721c24; }
       }
 
       .actions {
@@ -167,13 +174,8 @@
           font-size: 1rem;
           transition: all 0.2s;
 
-          &:hover {
-            transform: scale(1.1);
-          }
-
-          &.btn-danger:hover {
-            background: #fdecea;
-          }
+          &:hover { transform: scale(1.1); }
+          &.btn-danger:hover { background: #fdecea; }
         }
       }
     }
@@ -182,6 +184,7 @@
 
 body.dark-mode {
   .modal { background: #1e1e1e; }
+  .image-upload { border-color: #444; }
 
   .table-container {
     table {

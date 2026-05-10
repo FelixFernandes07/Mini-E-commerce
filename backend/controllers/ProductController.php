@@ -32,20 +32,26 @@ class ProductController {
             Response::error('Acesso negado!', 403);
         }
 
-        $data = json_decode(file_get_contents('php://input'), true);
+        require_once __DIR__ . '/../utils/upload.php';
+        $upload = new Upload();
 
-        if (empty($data['name']) || empty($data['price']) || empty($data['category_id'])) {
+        $image = '';
+        if (!empty($_FILES['image'])) {
+            $image = $upload->handleImage($_FILES['image']);
+            if (!$image) Response::error('Imagem inválida!');
+        }
+
+        $name = $_POST['name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $price = $_POST['price'] ?? 0;
+        $stock = $_POST['stock'] ?? 0;
+        $category_id = $_POST['category_id'] ?? 0;
+
+        if (empty($name) || empty($price) || empty($category_id)) {
             Response::error('Preenche todos os campos obrigatórios!');
         }
 
-        if ($this->product->create(
-            $data['name'],
-            $data['description'] ?? '',
-            $data['price'],
-            $data['stock'] ?? 0,
-            $data['category_id'],
-            $data['image'] ?? ''
-        )) {
+        if ($this->product->create($name, $description, (float)$price, (int)$stock, (int)$category_id, $image)) {
             Response::success(null, 'Produto criado com sucesso!', 201);
         } else {
             Response::error('Erro ao criar produto!', 500);
@@ -58,16 +64,22 @@ class ProductController {
             Response::error('Acesso negado!', 403);
         }
 
-        $data = json_decode(file_get_contents('php://input'), true);
+        require_once __DIR__ . '/../utils/upload.php';
+        $upload = new Upload();
 
-        if ($this->product->update(
-            $id,
-            $data['name'],
-            $data['description'] ?? '',
-            $data['price'],
-            $data['stock'] ?? 0,
-            $data['category_id']
-        )) {
+        $image = $_POST['image'] ?? '';
+        if (!empty($_FILES['image'])) {
+            $newImage = $upload->handleImage($_FILES['image']);
+            if ($newImage) $image = $newImage;
+        }
+
+        $name = $_POST['name'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $price = $_POST['price'] ?? 0;
+        $stock = $_POST['stock'] ?? 0;
+        $category_id = $_POST['category_id'] ?? 0;
+
+        if ($this->product->updateWithImage($id, $name, $description, (float)$price, (int)$stock, (int)$category_id, $image)) {
             Response::success(null, 'Produto actualizado com sucesso!');
         } else {
             Response::error('Erro ao actualizar produto!', 500);

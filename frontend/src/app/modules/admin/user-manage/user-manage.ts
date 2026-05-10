@@ -25,7 +25,7 @@ export class UserManageComponent implements OnInit {
     role: 'client'
   };
 
-  private apiUrl = 'http://localhost/Projecto Mini E-commerce/backend';
+private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.php';
 
   constructor(private http: HttpClient) {}
 

@@ -9,9 +9,9 @@ import { routes } from './app.routes';
 export class CustomTranslateLoader implements TranslateLoader {
   constructor(private http: HttpClient) {}
 
-  getTranslation(lang: string): Observable<any> {
-    return this.http.get<any>(`/assets/i18n/${lang}.json`);
-  }
+getTranslation(lang: string): Observable<any> {
+  return this.http.get<any>(`/i18n/${lang}.json`);
+}
 }
 
 export function HttpLoaderFactory(http: HttpClient) {

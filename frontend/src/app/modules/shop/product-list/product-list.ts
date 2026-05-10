@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductService } from '../../../core/services/product';
 
+
 @Component({
   selector: 'app-product-list',
   standalone: true,
