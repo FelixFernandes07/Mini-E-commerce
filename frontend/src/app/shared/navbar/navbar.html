@@ -11,9 +11,12 @@
       {{ 'NAVBAR.ORDERS' | translate }}
     </a>
 
-    <a *ngIf="isAdmin()" routerLink="/admin">
-      {{ 'NAVBAR.ADMIN' | translate }}
-    </a>
+    <ng-container *ngIf="isAdmin()">
+      <a routerLink="/admin">{{ 'NAVBAR.ADMIN' | translate }}</a>
+      <a routerLink="/admin/products">Produtos</a>
+      <a routerLink="/admin/orders">Pedidos</a>
+      <a routerLink="/admin/users">Utilizadores</a>
+    </ng-container>
 
     <a *ngIf="!auth.isLoggedIn()" routerLink="/auth/login">
       {{ 'NAVBAR.LOGIN' | translate }}
@@ -32,7 +35,6 @@
     <button (click)="toggleTheme()">
       {{ theme.isDarkMode() ? ('THEME.LIGHT' | translate) : ('THEME.DARK' | translate) }}
     </button>
-
     <button (click)="toggleLang()">
       {{ lang.getCurrentLang() === 'pt' ? 'EN' : 'PT' }}
     </button>
