@@ -1,1 +1,68 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <h2>{{ 'ADMIN.DASHBOARD' | translate }}</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card card">
+      <div class="stat-icon">📦</div>
+      <div class="stat-info">
+        <h3>{{ totalProducts }}</h3>
+        <p>{{ 'ADMIN.PRODUCTS' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="stat-icon">🛒</div>
+      <div class="stat-info">
+        <h3>{{ totalOrders }}</h3>
+        <p>{{ 'ADMIN.ORDERS' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-info">
+        <h3>{{ totalRevenue | currency:'AOA':'symbol':'1.0-0' }}</h3>
+        <p>Receita Total</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <a routerLink="/admin/products" class="action-card card">
+      <span>📦</span>
+      <p>{{ 'ADMIN.PRODUCTS' | translate }}</p>
+    </a>
+    <a routerLink="/admin/orders" class="action-card card">
+      <span>🛒</span>
+      <p>{{ 'ADMIN.ORDERS' | translate }}</p>
+    </a>
+    <a routerLink="/admin/users" class="action-card card">
+      <span>👥</span>
+      <p>Utilizadores</p>
+    </a>
+  </div>
+
+  <div class="recent-orders card" *ngIf="!loading">
+    <h3>Pedidos Recentes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Cliente</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of recentOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.user_name }}</td>
+          <td>{{ order.total | currency:'AOA':'symbol':'1.0-0' }}</td>
+          <td><span class="badge" [class]="order.status">{{ order.status }}</span></td>
+          <td>{{ order.created_at | date:'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
