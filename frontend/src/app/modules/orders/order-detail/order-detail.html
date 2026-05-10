@@ -1,1 +1,59 @@
-<p>order-detail works!</p>
+<div class="order-detail-container">
+  <div class="loading" *ngIf="loading">A carregar...</div>
+
+  <div *ngIf="!loading && order">
+    <div class="page-header">
+      <div>
+        <a routerLink="/orders" class="back-link">← Voltar</a>
+        <h2>Pedido #{{ order.id }}</h2>
+        <p class="order-date">{{ order.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+      <div class="header-actions">
+        <span class="badge" [class]="order.status">{{ order.status }}</span>
+        <button class="btn-primary" (click)="exportPDF()">
+          📄 {{ 'ORDERS.EXPORT' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="order-content">
+      <div class="order-items card">
+        <h3>Itens do Pedido</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.product_name }}</td>
+              <td>{{ item.price | currency:'AOA':'symbol':'1.0-0' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price * item.quantity | currency:'AOA':'symbol':'1.0-0' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="order-summary card">
+        <h3>Resumo</h3>
+        <div class="summary-row">
+          <p>Cliente</p>
+          <p>{{ order.user_name }}</p>
+        </div>
+        <div class="summary-row">
+          <p>Estado</p>
+          <span class="badge" [class]="order.status">{{ order.status }}</span>
+        </div>
+        <div class="summary-row total">
+          <p>Total</p>
+          <p>{{ order.total | currency:'AOA':'symbol':'1.0-0' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
