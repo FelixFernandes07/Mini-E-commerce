@@ -1,0 +1,77 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 64px;
+  background-color: #1a1a2e;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  .navbar-brand a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+
+      &:hover {
+        background: #c0392b;
+      }
+    }
+  }
+
+  .navbar-actions {
+    display: flex;
+    gap: 10px;
+
+    button {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+
+      &:hover {
+        background: white;
+        color: #1a1a2e;
+      }
+    }
+  }
+}
+
+// Modo escuro
+body.dark-mode .navbar {
+  background-color: #0d0d1a;
+}

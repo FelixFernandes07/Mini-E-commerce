@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/shop">🛒 MiniShop</a>
+  </div>
+
+  <div class="navbar-links">
+    <a routerLink="/shop">{{ 'NAVBAR.HOME' | translate }}</a>
+    <a routerLink="/shop/cart">{{ 'NAVBAR.CART' | translate }}</a>
+
+    <a *ngIf="auth.isLoggedIn()" routerLink="/orders">
+      {{ 'NAVBAR.ORDERS' | translate }}
+    </a>
+
+    <a *ngIf="isAdmin()" routerLink="/admin">
+      {{ 'NAVBAR.ADMIN' | translate }}
+    </a>
+
+    <a *ngIf="!auth.isLoggedIn()" routerLink="/auth/login">
+      {{ 'NAVBAR.LOGIN' | translate }}
+    </a>
+
+    <a *ngIf="!auth.isLoggedIn()" routerLink="/auth/register">
+      {{ 'NAVBAR.REGISTER' | translate }}
+    </a>
+
+    <button *ngIf="auth.isLoggedIn()" (click)="logout()">
+      {{ 'NAVBAR.LOGOUT' | translate }}
+    </button>
+  </div>
+
+  <div class="navbar-actions">
+    <button (click)="toggleTheme()">
+      {{ theme.isDarkMode() ? ('THEME.LIGHT' | translate) : ('THEME.DARK' | translate) }}
+    </button>
+
+    <button (click)="toggleLang()">
+      {{ lang.getCurrentLang() === 'pt' ? 'EN' : 'PT' }}
+    </button>
+  </div>
+</nav>

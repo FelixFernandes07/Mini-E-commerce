@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar';
+import { ThemeService } from './core/services/theme';
+import { LanguageService } from './core/services/language';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('frontend');
+export class App implements OnInit {
+  constructor(
+    private theme: ThemeService,
+    private language: LanguageService
+  ) {}
+
+  ngOnInit() {}
 }
