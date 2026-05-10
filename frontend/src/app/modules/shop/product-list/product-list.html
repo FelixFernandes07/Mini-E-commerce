@@ -1,1 +1,42 @@
-<p>product-list works!</p>
+<div class="shop-container">
+  <h2>{{ 'SHOP.TITLE' | translate }}</h2>
+
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (ngModelChange)="filterProducts()"
+      placeholder="{{ 'SHOP.SEARCH' | translate }}"
+    />
+    <select [(ngModel)]="selectedCategory" (ngModelChange)="filterProducts()">
+      <option value="">{{ 'SHOP.ALL' | translate }}</option>
+      <option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="loading" *ngIf="loading">A carregar...</div>
+
+  <div class="products-grid" *ngIf="!loading">
+    <div class="product-card card" *ngFor="let product of filtered">
+      <img [src]="product.image || 'assets/no-image.png'" [alt]="product.name"/>
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="category">{{ product.category_name }}</p>
+        <p class="price">{{ product.price | currency:'AOA':'symbol':'1.0-0' }}</p>
+        <p class="stock">Stock: {{ product.stock }}</p>
+      </div>
+      <div class="product-actions">
+        <a [routerLink]="['/shop/product', product.id]" class="btn-primary">
+          Ver detalhes
+        </a>
+        <button class="btn-success" (click)="addToCart(product)">
+          {{ 'SHOP.ADD_CART' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <p *ngIf="filtered.length === 0">{{ 'SHOP.NO_PRODUCTS' | translate }}</p>
+  </div>
+</div>

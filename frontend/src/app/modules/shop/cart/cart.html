@@ -1,1 +1,44 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h2>{{ 'CART.TITLE' | translate }}</h2>
+
+  <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <div class="cart-empty" *ngIf="cart.length === 0">
+    <div class="empty-icon">🛒</div>
+    <p>{{ 'CART.EMPTY' | translate }}</p>
+    <a routerLink="/shop" class="btn-primary">{{ 'NAVBAR.HOME' | translate }}</a>
+  </div>
+
+  <div class="cart-content" *ngIf="cart.length > 0">
+    <div class="cart-items">
+      <div class="cart-item card" *ngFor="let item of cart; let i = index">
+        <img [src]="item.image || 'assets/no-image.png'" [alt]="item.name"/>
+        <div class="item-info">
+          <h3>{{ item.name }}</h3>
+          <p class="item-price">{{ item.price | currency:'AOA':'symbol':'1.0-0' }}</p>
+        </div>
+        <div class="item-qty">
+          <button (click)="decreaseQty(item)">−</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increaseQty(item)">+</button>
+        </div>
+        <p class="item-total">
+          {{ item.price * item.quantity | currency:'AOA':'symbol':'1.0-0' }}
+        </p>
+        <button class="btn-danger remove" (click)="removeItem(i)">✕</button>
+      </div>
+    </div>
+
+    <div class="cart-summary card">
+      <h3>{{ 'CART.TOTAL' | translate }}</h3>
+      <div class="summary-total">
+        {{ getTotal() | currency:'AOA':'symbol':'1.0-0' }}
+      </div>
+      <button class="btn-primary checkout" (click)="checkout()" [disabled]="loading">
+        {{ loading ? '...' : ('CART.CHECKOUT' | translate) }}
+      </button>
+      <a routerLink="/shop" class="continue">Continuar a comprar</a>
+    </div>
+  </div>
+</div>

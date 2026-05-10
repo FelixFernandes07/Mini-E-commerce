@@ -1,0 +1,218 @@
+.shop-container {
+  padding: 32px 0;
+
+  h2 {
+    margin-bottom: 32px;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1a1a2e, #e74c3c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+    input {
+      flex: 1;
+      border: 2px solid transparent;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+
+      &:focus {
+        border-color: #1a1a2e;
+        background: white;
+      }
+    }
+
+    select {
+      width: 200px;
+      border: 2px solid transparent;
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:focus {
+        border-color: #1a1a2e;
+        background: white;
+      }
+    }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 80px;
+    font-size: 1.1rem;
+    color: #888;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f0f0f0;
+      border-top-color: #1a1a2e;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 16px auto 0;
+    }
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    background: white;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    }
+
+    .product-info {
+      padding: 20px;
+      flex: 1;
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: #1a1a2e;
+      }
+
+      .category {
+        font-size: 0.8rem;
+        color: #e74c3c;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .price {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #1a1a2e;
+        margin-bottom: 6px;
+      }
+
+      .stock {
+        font-size: 0.82rem;
+        color: #aaa;
+      }
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid #f0f0f0;
+
+      a, button {
+        flex: 1;
+        text-align: center;
+        text-decoration: none;
+        padding: 14px 8px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 0;
+        transition: all 0.2s;
+      }
+
+      a {
+        background: #f8f9fa;
+        color: #1a1a2e;
+
+        &:hover {
+          background: #1a1a2e;
+          color: white;
+        }
+      }
+
+      button {
+        background: #e74c3c;
+        color: white;
+
+        &:hover {
+          background: #c0392b;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+body.dark-mode {
+  .shop-container {
+    .filters {
+      background: #1e1e1e;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+      input, select {
+        background: #2a2a2a;
+        color: #e0e0e0;
+
+        &:focus {
+          border-color: #90caf9;
+          background: #333;
+        }
+      }
+    }
+
+    .product-card {
+      background: #1e1e1e;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+
+      .product-info {
+        h3 { color: #e0e0e0; }
+        .price { color: #90caf9; }
+      }
+
+      .product-actions {
+        border-top-color: #333;
+
+        a {
+          background: #2a2a2a;
+          color: #e0e0e0;
+
+          &:hover {
+            background: #90caf9;
+            color: #1a1a2e;
+          }
+        }
+      }
+    }
+  }
+}
