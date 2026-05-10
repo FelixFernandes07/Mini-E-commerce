@@ -1,1 +1,107 @@
-<p>product-manage works!</p>
+<div class="product-manage-container">
+  <div class="page-header">
+    <h2>{{ 'ADMIN.PRODUCTS' | translate }}</h2>
+    <div class="header-actions">
+      <button class="btn-success" (click)="exportCSV()">
+        📥 {{ 'ADMIN.EXPORT_CSV' | translate }}
+      </button>
+      <button class="btn-primary" (click)="openCreate()">
+        + {{ 'ADMIN.ADD_PRODUCT' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <!-- Modal Form -->
+  <div class="modal-overlay" *ngIf="showForm" (click)="closeForm()">
+    <div class="modal card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ editMode ? 'Editar Produto' : ('ADMIN.ADD_PRODUCT' | translate) }}</h3>
+        <button class="close" (click)="closeForm()">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'ADMIN.NAME' | translate }}</label>
+        <input type="text" [(ngModel)]="form.name" placeholder="Nome do produto"/>
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'ADMIN.DESCRIPTION' | translate }}</label>
+        <textarea [(ngModel)]="form.description" rows="3" placeholder="Descrição"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{ 'ADMIN.PRICE' | translate }}</label>
+          <input type="number" [(ngModel)]="form.price" placeholder="0"/>
+        </div>
+        <div class="form-group">
+          <label>{{ 'ADMIN.STOCK' | translate }}</label>
+          <input type="number" [(ngModel)]="form.stock" placeholder="0"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'ADMIN.CATEGORY' | translate }}</label>
+        <select [(ngModel)]="form.category_id">
+          <option value="">Selecciona categoria</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>URL da Imagem</label>
+        <input type="text" [(ngModel)]="form.image" placeholder="https://..."/>
+      </div>
+
+      <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+      <div class="modal-actions">
+        <button class="btn-primary" (click)="saveProduct()">Guardar</button>
+        <button (click)="closeForm()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-container card" *ngIf="!loading">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ 'ADMIN.NAME' | translate }}</th>
+          <th>{{ 'ADMIN.PRICE' | translate }}</th>
+          <th>{{ 'ADMIN.STOCK' | translate }}</th>
+          <th>{{ 'ADMIN.CATEGORY' | translate }}</th>
+          <th>Acções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>
+            <div class="product-name">
+              <img [src]="product.image || 'assets/no-image.png'" [alt]="product.name"/>
+              {{ product.name }}
+            </div>
+          </td>
+          <td>{{ product.price | currency:'AOA':'symbol':'1.0-0' }}</td>
+          <td>
+            <span class="stock-badge" [class.low]="product.stock < 5">
+              {{ product.stock }}
+            </span>
+          </td>
+          <td>{{ product.category_name }}</td>
+          <td>
+            <div class="actions">
+              <button class="btn-edit" (click)="openEdit(product)">✏️</button>
+              <button class="btn-danger" (click)="deleteProduct(product.id)">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
