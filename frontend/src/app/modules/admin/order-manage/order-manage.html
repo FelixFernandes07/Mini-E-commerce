@@ -1,1 +1,49 @@
-<p>order-manage works!</p>
+<div class="order-manage-container">
+  <div class="page-header">
+    <h2>{{ 'ADMIN.ORDERS' | translate }}</h2>
+    <button class="btn-success" (click)="exportCSV()">
+      📥 {{ 'ADMIN.EXPORT_CSV' | translate }}
+    </button>
+  </div>
+
+  <div class="alert alert-success" *ngIf="success">{{ success }}</div>
+  <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+  <div class="loading" *ngIf="loading">A carregar...</div>
+
+  <div class="table-container card" *ngIf="!loading">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Cliente</th>
+          <th>Email</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Data</th>
+          <th>Acções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.user_name }}</td>
+          <td>{{ order.user_email }}</td>
+          <td>{{ order.total | currency:'AOA':'symbol':'1.0-0' }}</td>
+          <td>
+            <span class="badge" [class]="order.status">{{ order.status }}</span>
+          </td>
+          <td>{{ order.created_at | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <select (change)="updateStatus(order.id, $any($event.target).value)" [value]="order.status">
+              <option value="pending">Pendente</option>
+              <option value="processing">Em processo</option>
+              <option value="completed">Concluído</option>
+              <option value="cancelled">Cancelado</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
