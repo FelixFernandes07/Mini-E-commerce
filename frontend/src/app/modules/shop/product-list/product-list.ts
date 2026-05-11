@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -23,24 +24,25 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService) {}
 
-  ngOnInit() {
-    this.productService.getAll().subscribe({
-      next: (res) => {
-        this.products = res.data;
-        this.filtered = res.data;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
+ngOnInit() {
+  this.loading = true;
+  this.productService.getAll().subscribe({
+    next: (res) => {
+      this.products = res.data || [];
+      this.filtered = res.data || [];
+      this.loading = false;
+    },
+    error: () => {
+      this.loading = false;
+    }
+  });
 
-    this.productService.getCategories().subscribe({
-      next: (res) => {
-        this.categories = res.data;
-      }
-    });
-  }
+  this.productService.getCategories().subscribe({
+    next: (res) => {
+      this.categories = res.data || [];
+    }
+  });
+}
 
   filterProducts() {
     this.filtered = this.products.filter(p => {

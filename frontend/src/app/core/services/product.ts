@@ -6,30 +6,40 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
- private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.php';
+  private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend';
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products/index.php`);
+    return this.http.get(`${this.apiUrl}/routes/products.php`);
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products/show.php?id=${id}`);
+    return this.http.get(`${this.apiUrl}/routes/products.php?id=${id}`);
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/products/create.php`, data);
+    const token = localStorage.getItem('token');
+    return this.http.post(`${this.apiUrl}/routes/products.php`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   update(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/products/update.php?id=${id}`, data);
+    const token = localStorage.getItem('token');
+    return this.http.put(`${this.apiUrl}/routes/products.php?id=${id}`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/products/delete.php?id=${id}`);
+    const token = localStorage.getItem('token');
+    return this.http.delete(`${this.apiUrl}/routes/products.php?id=${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   getCategories(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/categories/index.php`);
+    return this.http.get(`${this.apiUrl}/routes/categories.php`);
   }
 }

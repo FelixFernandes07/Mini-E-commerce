@@ -88,7 +88,7 @@
           <td>{{ product.id }}</td>
           <td>
             <div class="product-name">
-              <img [src]="product.image || 'https://placehold.co/40x40'" [alt]="product.name"/>
+              <img [src]="product.image?.startsWith('http') ? product.image : 'http://localhost/Projecto%20Mini%20E-commerce/backend/' + product.image" [alt]="product.name"/>
               {{ product.name }}
             </div>
           </td>
