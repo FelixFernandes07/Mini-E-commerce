@@ -19,7 +19,7 @@
 
   <div class="products-grid" *ngIf="!loading">
     <div class="product-card card" *ngFor="let product of filtered">
-      <img [src]="product.image || 'assets/no-image.png'" [alt]="product.name"/>
+     <img [src]="product.image?.startsWith('http') ? product.image : 'http://localhost/Projecto%20Mini%20E-commerce/backend/' + product.image || 'https://placehold.co/400x300'" [alt]="product.name"/>
       <div class="product-info">
         <h3>{{ product.name }}</h3>
         <p class="category">{{ product.category_name }}</p>

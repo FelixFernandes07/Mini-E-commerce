@@ -6,32 +6,51 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
- private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.php';
+  private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend';
 
   constructor(private http: HttpClient) {}
 
   getMyOrders(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return this.http.get(`${this.apiUrl}/orders/index.php?user_id=${user.id}`);
+    const token = localStorage.getItem('token');
+    return this.http.get(`${this.apiUrl}/routes/orders.php?user_id=${user.id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   getAllOrders(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/orders/index.php`);
+    const token = localStorage.getItem('token');
+    return this.http.get(`${this.apiUrl}/routes/orders.php`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   getById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/orders/show.php?id=${id}`);
+    const token = localStorage.getItem('token');
+    return this.http.get(`${this.apiUrl}/routes/orders.php?id=${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/orders/create.php`, data);
+    const token = localStorage.getItem('token');
+    return this.http.post(`${this.apiUrl}/routes/orders.php`, data, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   updateStatus(id: number, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/orders/update.php?id=${id}`, { status });
+    const token = localStorage.getItem('token');
+    return this.http.put(`${this.apiUrl}/routes/orders.php?id=${id}`, { status }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
   }
 
   exportCSV(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/orders/export.php`, { responseType: 'blob' });
+    const token = localStorage.getItem('token');
+    return this.http.get(`${this.apiUrl}/routes/orders.php?export=csv`, {
+      headers: { Authorization: `Bearer ${token}` },
+      responseType: 'blob'
+    });
   }
 }
