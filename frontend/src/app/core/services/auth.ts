@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.php';
+  private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend';
 
   constructor(private http: HttpClient) {}
 
   register(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/register.php`, data);
+    return this.http.post(`${this.apiUrl}/routes/auth.php/register`, data);
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login.php`, data);
+    return this.http.post(`${this.apiUrl}/routes/auth.php`, data);
   }
 
   logout(): void {
@@ -24,7 +24,7 @@ private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.ph
   }
 
   resetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/reset-password.php`, { email });
+    return this.http.post(`${this.apiUrl}/routes/auth.php/reset`, { email });
   }
 
   isLoggedIn(): boolean {
@@ -32,12 +32,17 @@ private apiUrl = 'http://localhost/Projecto%20Mini%20E-commerce/backend/index.ph
   }
 
   getUser(): any {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    try {
+      const user = localStorage.getItem('user');
+      if (!user || user === 'undefined') return null;
+      return JSON.parse(user);
+    } catch {
+      return null;
+    }
   }
 
   isAdmin(): boolean {
     const user = this.getUser();
-    return user && user.role === 'admin';
+    return user !== null && user.role === 'admin';
   }
 }

@@ -24,24 +24,31 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
-    this.loading = true;
-    this.error = '';
+  this.loading = true;
+  this.error = '';
 
-    this.auth.login({ email: this.email, password: this.password }).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('user', JSON.stringify(res.user));
+  this.auth.login({ email: this.email, password: this.password }).subscribe({
+    next: (res) => {
+      console.log('Resposta:', res);
+      if (res && res.success) {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
 
-        if (res.user.role === 'admin') {
+        if (res.data.user.role === 'admin') {
           this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/shop']);
         }
-      },
-      error: (err) => {
-        this.error = err.error?.message || 'Erro ao fazer login';
+      } else {
+        this.error = res.message || 'Erro ao fazer login';
         this.loading = false;
       }
-    });
-  }
+    },
+    error: (err) => {
+      console.log('Erro:', err);
+      this.error = err.error?.message || 'Erro ao fazer login';
+      this.loading = false;
+    }
+  });
+}
 }
