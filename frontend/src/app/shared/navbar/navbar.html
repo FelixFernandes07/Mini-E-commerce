@@ -1,42 +1,56 @@
 <nav class="navbar">
   <div class="navbar-brand">
-    <a routerLink="/shop">🛒 MiniShop</a>
+    <a routerLink="/shop">
+      <span class="logo-icon">🛒</span>
+      <span class="logo-text">Mini<strong>Shop</strong></span>
+    </a>
   </div>
 
   <div class="navbar-links">
-    <a routerLink="/shop">{{ 'NAVBAR.HOME' | translate }}</a>
-    <a routerLink="/shop/cart">{{ 'NAVBAR.CART' | translate }}</a>
-
-    <a *ngIf="auth.isLoggedIn()" routerLink="/orders">
-      {{ 'NAVBAR.ORDERS' | translate }}
+    <a routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+      <span>🏠</span> {{ 'NAVBAR.HOME' | translate }}
     </a>
-
+    <a routerLink="/shop/cart" routerLinkActive="active">
+      <span>🛒</span> {{ 'NAVBAR.CART' | translate }}
+    </a>
+    <a *ngIf="auth.isLoggedIn()" routerLink="/orders" routerLinkActive="active">
+      <span>📦</span> {{ 'NAVBAR.ORDERS' | translate }}
+    </a>
     <ng-container *ngIf="isAdmin()">
-      <a routerLink="/admin">{{ 'NAVBAR.ADMIN' | translate }}</a>
-      <a routerLink="/admin/products">Produtos</a>
-      <a routerLink="/admin/orders">Pedidos</a>
-      <a routerLink="/admin/users">Utilizadores</a>
+      <a routerLink="/admin" routerLinkActive="active">
+        <span>⚙️</span> {{ 'NAVBAR.ADMIN' | translate }}
+      </a>
     </ng-container>
-
-    <a *ngIf="!auth.isLoggedIn()" routerLink="/auth/login">
-      {{ 'NAVBAR.LOGIN' | translate }}
-    </a>
-
-    <a *ngIf="!auth.isLoggedIn()" routerLink="/auth/register">
-      {{ 'NAVBAR.REGISTER' | translate }}
-    </a>
-
-    <button *ngIf="auth.isLoggedIn()" (click)="logout()">
-      {{ 'NAVBAR.LOGOUT' | translate }}
-    </button>
   </div>
 
-  <div class="navbar-actions">
-    <button (click)="toggleTheme()">
-      {{ theme.isDarkMode() ? ('THEME.LIGHT' | translate) : ('THEME.DARK' | translate) }}
+  <div class="navbar-right">
+    <button class="btn-theme" (click)="toggleTheme()" [title]="theme.isDarkMode() ? ('THEME.LIGHT' | translate) : ('THEME.DARK' | translate)">
+      {{ theme.isDarkMode() ? '☀️' : '🌙' }}
     </button>
-    <button (click)="toggleLang()">
-      {{ lang.getCurrentLang() === 'pt' ? 'EN' : 'PT' }}
+
+    <button class="btn-lang" (click)="toggleLang()">
+      {{ lang.getCurrentLang() === 'pt' ? '🇬🇧 EN' : '🇦🇴 PT' }}
     </button>
+
+    <ng-container *ngIf="!auth.isLoggedIn()">
+      <a routerLink="/auth/login" class="btn-login">
+        {{ 'NAVBAR.LOGIN' | translate }}
+      </a>
+      <a routerLink="/auth/register" class="btn-register">
+        {{ 'NAVBAR.REGISTER' | translate }}
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <div class="user-menu">
+        <div class="user-avatar">
+          {{ auth.getUser()?.name?.charAt(0)?.toUpperCase() }}
+        </div>
+        <span class="user-name">{{ auth.getUser()?.name }}</span>
+        <button class="btn-logout" (click)="logout()">
+          {{ 'NAVBAR.LOGOUT' | translate }}
+        </button>
+      </div>
+    </ng-container>
   </div>
 </nav>

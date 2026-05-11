@@ -1,10 +1,10 @@
 <div class="auth-container">
-  <div class="card auth-card">
+  <div class="auth-card">
+    <div class="auth-logo">🛒</div>
     <h2>{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
+    <p class="auth-subtitle">Bem-vindo de volta!</p>
 
-    <div class="alert alert-error" *ngIf="error">
-      {{ error }}
-    </div>
+    <div class="alert alert-error" *ngIf="error">{{ error }}</div>
 
     <form (ngSubmit)="onSubmit()">
       <div class="form-group">
