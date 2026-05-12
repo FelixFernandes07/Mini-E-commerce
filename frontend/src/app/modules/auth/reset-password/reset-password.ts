@@ -13,24 +13,74 @@ import { AuthService } from '../../../core/services/auth';
   styleUrl: './reset-password.scss'
 })
 export class ResetPasswordComponent {
+  step = 1;
   email = '';
+  code = '';
+  generatedCode = '';
+  newPassword = '';
+  confirmPassword = '';
   error = '';
   success = '';
   loading = false;
 
   constructor(private auth: AuthService) {}
 
-  onSubmit() {
+  requestCode() {
     this.loading = true;
     this.error = '';
 
     this.auth.resetPassword(this.email).subscribe({
-      next: () => {
-        this.success = 'Email de recuperação enviado!';
+      next: (res) => {
+        this.generatedCode = res.data?.code;
+        this.success = `Código gerado: ${this.generatedCode}`;
+        this.step = 2;
         this.loading = false;
       },
       error: (err) => {
-        this.error = err.error?.message || 'Erro ao enviar email';
+        this.error = err.error?.message || 'Erro ao gerar código!';
+        this.loading = false;
+      }
+    });
+  }
+
+  verifyCode() {
+    this.loading = true;
+    this.error = '';
+
+    this.auth.verifyCode(this.email, this.code).subscribe({
+      next: () => {
+        this.step = 3;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Código inválido!';
+        this.loading = false;
+      }
+    });
+  }
+
+  setNewPassword() {
+    if (this.newPassword !== this.confirmPassword) {
+      this.error = 'As senhas não coincidem!';
+      return;
+    }
+
+    if (this.newPassword.length < 6) {
+      this.error = 'A senha deve ter pelo menos 6 caracteres!';
+      return;
+    }
+
+    this.loading = true;
+    this.error = '';
+
+    this.auth.setNewPassword(this.email, this.code, this.newPassword).subscribe({
+      next: () => {
+        this.success = 'Senha alterada com sucesso!';
+        this.step = 4;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Erro ao alterar senha!';
         this.loading = false;
       }
     });

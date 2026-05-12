@@ -24,31 +24,34 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
-  this.loading = true;
-  this.error = '';
+    if (this.loading) return;
+    if (!this.email || !this.password) {
+      this.error = 'Preenche todos os campos!';
+      return;
+    }
 
-  this.auth.login({ email: this.email, password: this.password }).subscribe({
-    next: (res) => {
-      console.log('Resposta:', res);
-      if (res && res.success) {
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('user', JSON.stringify(res.data.user));
+    this.loading = true;
+    this.error = '';
 
-        if (res.data.user.role === 'admin') {
-          this.router.navigate(['/admin']);
+    this.auth.login({ email: this.email, password: this.password }).subscribe({
+      next: (res) => {
+        if (res && res.success) {
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          if (res.data.user.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/shop']);
+          }
         } else {
-          this.router.navigate(['/shop']);
+          this.error = res.message || 'Erro ao fazer login';
+          this.loading = false;
         }
-      } else {
-        this.error = res.message || 'Erro ao fazer login';
+      },
+      error: (err) => {
+        this.error = err.error?.message || 'Erro ao fazer login';
         this.loading = false;
       }
-    },
-    error: (err) => {
-      console.log('Erro:', err);
-      this.error = err.error?.message || 'Erro ao fazer login';
-      this.loading = false;
-    }
-  });
-}
+    });
+  }
 }

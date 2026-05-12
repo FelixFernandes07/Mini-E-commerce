@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/routes/auth.php/register`, data);
+    return this.http.post(`${this.apiUrl}/routes/auth.php?action=register`, data);
   }
 
   login(data: any): Observable<any> {
@@ -24,7 +24,15 @@ export class AuthService {
   }
 
   resetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/routes/auth.php/reset`, { email });
+    return this.http.post(`${this.apiUrl}/routes/auth.php?action=reset`, { email });
+  }
+
+  verifyCode(email: string, code: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/routes/auth.php?action=verify-code`, { email, code });
+  }
+
+  setNewPassword(email: string, code: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/routes/auth.php?action=new-password`, { email, code, password });
   }
 
   isLoggedIn(): boolean {
