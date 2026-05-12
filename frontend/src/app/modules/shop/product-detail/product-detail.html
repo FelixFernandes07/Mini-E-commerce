@@ -1,1 +1,120 @@
-<p>product-detail works!</p>
+<div class="detail-page">
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>A carregar produto...</p>
+  </div>
+
+  <div *ngIf="!loading && product">
+    <a routerLink="/shop" class="back-btn">← Voltar à loja</a>
+
+    <div class="product-layout">
+
+      <!-- Imagem -->
+      <div class="image-section">
+        <div class="image-wrapper">
+          <img [src]="getImage()" [alt]="product.name"/>
+          <div class="img-overlay"></div>
+        </div>
+        <div class="image-badges">
+          <div class="img-badge">🔒 Pagamento Seguro</div>
+          <div class="img-badge">🚚 Entrega Rápida</div>
+          <div class="img-badge">⭐ Qualidade</div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="info-section">
+
+        <!-- Header -->
+        <div class="product-header">
+          <div class="category-tag">🏷️ {{ product.category_name }}</div>
+          <h1>{{ product.name }}</h1>
+          <div class="product-meta">
+            <span class="rating">⭐⭐⭐⭐⭐</span>
+            <span class="reviews">(24 avaliações)</span>
+            <span class="divider"></span>
+            <span class="sku">SKU: #{{ product.id }}000</span>
+          </div>
+        </div>
+
+        <!-- Preço -->
+        <div class="price-block">
+          <div class="price-info">
+            <div class="price-label">Preço</div>
+            <div class="price">{{ product.price | currency:'AOA':'symbol':'1.0-0' }}</div>
+          </div>
+          <div class="stock-info">
+            <span class="stock-badge"
+              [class.in-stock]="product.stock >= 5"
+              [class.low-stock]="product.stock > 0 && product.stock < 5"
+              [class.out-stock]="product.stock === 0">
+              {{ product.stock >= 5 ? '✅ Em Stock' : product.stock > 0 ? '⚠️ Últimas unidades' : '❌ Sem Stock' }}
+            </span>
+            <span class="stock-count" *ngIf="product.stock > 0">{{ product.stock }} unidades disponíveis</span>
+          </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="description-block">
+          <div class="block-title">Descrição</div>
+          <p>{{ product.description || 'Sem descrição disponível.' }}</p>
+        </div>
+
+        <!-- Quantidade -->
+        <div class="quantity-block" *ngIf="product.stock > 0">
+          <div class="block-title">Quantidade</div>
+          <div class="qty-wrapper">
+            <div class="qty-control">
+              <button (click)="decreaseQty()" [disabled]="quantity <= 1">−</button>
+              <span>{{ quantity }}</span>
+              <button (click)="increaseQty()" [disabled]="quantity >= product.stock">+</button>
+            </div>
+            <span class="qty-hint">Máx. {{ product.stock }} unidades</span>
+          </div>
+        </div>
+
+        <!-- Toast sucesso -->
+        <div class="success-toast" *ngIf="success">
+          <span class="toast-icon">🛒</span>
+          <span>{{ success }}</span>
+        </div>
+
+        <!-- Botões -->
+        <div class="action-block">
+          <button class="btn-add-cart" (click)="addToCart()" [disabled]="product.stock === 0">
+            🛒 {{ 'SHOP.ADD_CART' | translate }}
+          </button>
+          <a routerLink="/shop/cart" class="btn-view-cart">
+            Ver Carrinho →
+          </a>
+        </div>
+
+        <!-- Features -->
+        <div class="features-block">
+          <div class="feature">
+            <span class="feature-icon">🔒</span>
+            <span class="feature-text">Pagamento Seguro</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">🚚</span>
+            <span class="feature-text">Entrega Rápida</span>
+          </div>
+          <div class="feature">
+            <span class="feature-icon">↩️</span>
+            <span class="feature-text">Devoluções Fáceis</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="not-found" *ngIf="!loading && !product">
+    <div class="not-found-icon">😕</div>
+    <h2>Produto não encontrado!</h2>
+    <p>O produto que procuras não existe ou foi removido.</p>
+    <a routerLink="/shop" class="btn-primary">← Voltar à loja</a>
+  </div>
+
+</div>
