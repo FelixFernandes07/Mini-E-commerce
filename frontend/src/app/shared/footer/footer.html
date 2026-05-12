@@ -1,37 +1,106 @@
 <footer class="footer">
-  <div class="footer-container">
+  <!-- Wave top -->
+  <div class="footer-wave">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="currentColor"/>
+    </svg>
+  </div>
 
-    <div class="footer-brand">
-      <h2>MiniShop</h2>
-      <p>Compra rápida, simples e segura.</p>
-    </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <span class="logo-emoji">🛒</span>
+          <span class="logo-text">Mini<strong>Shop</strong></span>
+        </div>
+        <p class="brand-desc">A melhor experiência de compras online em Angola. Qualidade, rapidez e confiança em cada pedido.</p>
+        
+        <div class="social-links">
+          <a href="https://wa.me/244900000000" target="_blank" class="social-btn whatsapp">
+            <span>💬</span>
+            <span>WhatsApp</span>
+          </a>
+          <a href="mailto:minishop&#64;gmail.com" class="social-btn email">
+            <span>📧</span>
+            <span>Email</span>
+          </a>
+          <a href="#" class="social-btn instagram">
+            <span>📸</span>
+            <span>Instagram</span>
+          </a>
+          <a href="#" class="social-btn facebook">
+            <span>👥</span>
+            <span>Facebook</span>
+          </a>
+        </div>
+      </div>
 
-    <div class="footer-links">
-      <h4>Navegação</h4>
-      <a href="#">Home</a>
-      <a href="#">Produtos</a>
-      <a href="#">Categorias</a>
-      <a href="#">Contato</a>
-    </div>
+      <!-- Links -->
+      <div class="footer-col">
+        <h4><span>🏪</span> Loja</h4>
+        <ul>
+          <li><a routerLink="/shop">Todos os Produtos</a></li>
+          <li><a routerLink="/shop/cart">Carrinho de Compras</a></li>
+          <li><a routerLink="/orders">Os Meus Pedidos</a></li>
+        </ul>
+      </div>
 
-    <div class="footer-contact">
-      <h4>Contato</h4>
-      <p>Email: suporte@minishop.com</p>
-      <p>Tel: +244 900 000 000</p>
-    </div>
+      <div class="footer-col">
+        <h4><span>👤</span> Conta</h4>
+        <ul>
+          <li><a routerLink="/auth/login">Iniciar Sessão</a></li>
+          <li><a routerLink="/auth/register">Criar Conta</a></li>
+          <li><a routerLink="/auth/reset-password">Recuperar Senha</a></li>
+        </ul>
+      </div>
 
-    <div class="footer-social">
-      <h4>Social</h4>
-      <div class="icons">
-        <a href="#">FB</a>
-        <a href="#">IG</a>
-        <a href="#">WA</a>
+      <div class="footer-col">
+        <h4><span>📞</span> Contacto</h4>
+        <ul>
+          <li>
+            <a href="https://wa.me/244900000000" target="_blank">
+              💬 +244 900 000 000
+            </a>
+          </li>
+          <li>
+            <a href="mailto:minishop@gmail.com">
+              📧 minishop&#64;gmail.com
+            </a>
+          </li>
+          <li>
+            <span class="location">📍 Luanda, Angola</span>
+          </li>
+          <li>
+            <span class="hours">🕒 Seg-Sex: 8h - 18h</span>
+          </li>
+        </ul>
       </div>
     </div>
 
+    <!-- Newsletter -->
+    <div class="newsletter">
+      <div class="newsletter-text">
+        <h3>📬 Subscreve a nossa newsletter</h3>
+        <p>Recebe as melhores ofertas e novidades directamente no teu email!</p>
+      </div>
+      <div class="newsletter-form">
+        <input type="email" placeholder="O teu email aqui..."/>
+        <button class="btn-subscribe">Subscrever</button>
+      </div>
+    </div>
   </div>
 
+  <!-- Bottom -->
   <div class="footer-bottom">
-    <p>© 2026 MiniShop - Todos os direitos reservados</p>
+    <div class="footer-bottom-content">
+      <p>© {{ currentYear }} <strong>MiniShop</strong>. Todos os direitos reservados.</p>
+      <div class="badges">
+        <span class="badge">🔒 Pagamento Seguro</span>
+        <span class="badge">🚚 Entrega Rápida</span>
+        <span class="badge">⭐ Qualidade Garantida</span>
+      </div>
+      <p class="credit">Desenvolvido por <strong>Felix Fernandes</strong> — IPIL 2025/2026</p>
+    </div>
   </div>
 </footer>
